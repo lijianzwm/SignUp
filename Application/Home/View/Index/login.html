@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<script type="text/javascript" src="__PUBLIC__/js/signup.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<body>
+<form action="{:U('Index/modify')}" method="post">
+<div>
+    手机号：<input name="phone" id="phone"/>
+    <input type="button" id="btn" value="获取验证码" onclick="sendVerifyCode('{:U('Index/loginVerifyCode')}')" />
+</div>
+<div>
+    <input type="hidden" name="rightCode" id="rightCode"/>
+    验证码：<input name="code" id="code"/><a id="isRightCode"></a>
+</div>
+<div>
+    <input type="submit" value="登录"/>
+</div>
+<form>
+</body>
+</html>

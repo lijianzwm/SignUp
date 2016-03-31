@@ -5,102 +5,12 @@
     <title>报名</title>
 </head>
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/signup.js"></script>
 <script type="text/javascript">
-    var wait=60;
-    var code = 9999;
+
     window.onload = function(){
         loadRegion('province','city','{:U('Index/getRegion')}');
     };
-
-    function loadRegion(sel,selName,url){
-        jQuery("#"+selName+" option").each(function(){
-            jQuery(this).remove();
-        });
-        jQuery("#"+selName);
-        if(jQuery("#"+sel).val()==0){
-            return;
-        }
-        jQuery.getJSON(url,{pid:jQuery("#"+sel).val()},
-                function(data){
-                    if(data){
-                        jQuery.each(data,function(idx,item){
-                            jQuery("<option "+"id="+item.id+"value="+item.id+">"+item.name+"</option>").appendTo(jQuery("#"+selName));
-                        });
-                    }else{
-                        jQuery("#"+selName);
-                    }
-                }
-        );
-    }
-
-    function sendVerifyCode(url){
-        wait=60;
-        code = Math.round(Math.random()*9000)+1000;
-        document.getElementById("rightCode").value=code;
-        o = document.getElementById("btn");
-        document.getElementById("isRightCode").innerHTML="";
-        document.getElementById("code").value="";
-        jQuery.getJSON(url,{phone:jQuery("#"+'phone').val(),code:code},
-                function(data){
-                    if(data){
-
-                    }else{
-                        alert("后台数据错误！");
-                    }
-                }
-        );
-        time(o);
-    }
-
-    function time(o) {
-        if (wait == 0) {
-            o.removeAttribute("disabled");
-            o.value="免费获取验证码";
-            wait = 60;
-        } else {
-            o.setAttribute("disabled", true);
-            o.value="重新发送(" + wait + ")";
-            wait--;
-            setTimeout(function() {
-                        time(o)
-                    },
-                    1000)
-        }
-    }
-
-    function volidateCode(){
-        correctCode = document.getElementById("rightCode").value;
-        code =  parseInt(document.getElementById("code").value);
-        codeStatus = document.getElementById("isRightCode");
-        if( code == correctCode ){
-            codeStatus.innerHTML="√";
-        }else{
-            codeStatus.innerHTML="×"
-        }
-    }
-
-    function register(url){
-        $name = $("input[name='name']").val();
-        $phone = $("input[name='phone']").val();
-        $verifyCode = $("input[name='code']").val();
-        $rightCode = $("input[name='rightCode']").val();
-        $province = $("#province  option:selected").text();
-        $city = $("#city  option:selected").text();
-        $accommodation = $("input[name='accommodation']:checked").val();
-        if( $name && $phone && $verifyCode && $province && $city && ($verifyCode == $rightCode ) ){
-            jQuery.getJSON(url,{name:$name, phone:$phone, province:$province, city:$city, accomodation:$accommodation},
-                    function(data){
-                        if(data){
-                            alert("注册成功！");
-                        }else{
-                            alert("后台数据错误！");
-                        }
-                    }
-            );
-        }else{
-            alert("请填写正确的信息！");
-        }
-    }
 
 </script>
 <body>
@@ -110,7 +20,6 @@
     <div>手机号</div>
     <div>
         <input name="phone" id="phone"/>
-        <!--<a href="#" id="btn" onclick="sendVerifyCode('{:U('Index/sendVerifyCode')}')">-->
             <input type="button" id="btn" value="获取验证码" onclick="sendVerifyCode('{:U('Index/sendVerifyCode')}')" />
             <!--获取验证码</a>-->
     </div>
@@ -131,8 +40,10 @@
         <input type="radio" name="accommodation" value="0"/>否
     </div>
     <div>
-        <!--<input type="submit" value="报名参加"/>-->
         <a href="#" onclick="register('{:U('Index/register')}')">报名参加</a>
+    </div>
+    <div>
+        <a href="{:U('Index/login')}">修改报名信息</a>
     </div>
 </form>
 <div>
