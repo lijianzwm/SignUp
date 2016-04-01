@@ -82,6 +82,7 @@ class IndexController extends Controller {
             $this->error("验证码错误！");
         }
         $phone = I("phone");
+        if( $phone)
         $data = M("members")->where("phone=$phone")->find();
         $province = $data['province'];
         $city = $data['city'];

@@ -3,22 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
+    <style type="text/css">
+        .main-login {
+            margin: 0 auto;
+            width: 430px;
+            margin-top: 20px;
+        }
+
+        .main-login div {
+            font-size: 15px;
+        }
+
+        .main-log-info {
+            clear: both;
+            margin-top: 40px;
+        }
+
+        .main-log-info div {
+            float: left;
+        }
+
+        h3 {
+            display: block;
+            margin-top: 0px;
+            padding-top: 0px;
+            width: 100%;
+            line-height: 50px;
+            text-align: center;
+            color: #fff;
+            background-color: #3385FF;
+        }
+
+        .main-log-info-left {
+            line-height: 28px;
+            width: 100px;
+            text-align: right;
+            margin-right: 20px;
+        }
+
+        .ipt {
+            padding: 4px 5px;
+            border: #ABABAB 1px solid;
+            box-shadow: 2px 2px 3px #EDEDED inset;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+
+        .btn-log {
+            text-align: center;
+            width: 200px;
+        }
+
+    </style>
 </head>
 <script type="text/javascript" src="__PUBLIC__/js/signup.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript">
+    rightCode = 9999;
+    window.onload = function(){
+        document.getElementById("rightCode").value = rightCode;
+    }
+</script>
 <body>
 <form action="{:U('Index/modify')}" method="post">
-<div>
-    手机号：<input name="phone" id="phone"/>
-    <input type="button" id="btn" value="获取验证码" onclick="sendVerifyCode('{:U('Index/loginVerifyCode')}')" />
+<div class="main-login">
+    <div class="main-log-info">
+        <div class="main-log-info-left">手机号</div>
+        <div class="main-log-info-right">
+            <input name="phone" id="phone" class="ipt">
+            <input type="button" id="btn" value="获取验证码" onclick="sendVerifyCode('{:U('Index/loginVerifyCode')}')" class="ipt">
+        </div>
+    </div>
+
+    <div class="main-log-info">
+        <div class="main-log-info-left">验证码
+            <input type="hidden" name="rightCode" id="rightCode" >
+        </div>
+        <div class="main-log-info-right">
+            <input name="code" id="code" class="ipt">
+            <a id="isRightCode"></a>
+        </div>
+    </div>
+
+    <div class="main-log-info">
+        <div class="main-log-info-left">&nbsp;</div>
+        <div class="main-log-info-right">
+            <input type="submit" value="登录" class="btn-log ipt" />
+        </div>
+    </div>
 </div>
-<div>
-    <input type="hidden" name="rightCode" id="rightCode"/>
-    验证码：<input name="code" id="code"/><a id="isRightCode"></a>
-</div>
-<div>
-    <input type="submit" value="登录"/>
-</div>
-<form>
+</form>
+
 </body>
 </html>

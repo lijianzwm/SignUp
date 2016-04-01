@@ -3,6 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <title>修改报名信息</title>
+    <style type="text/css">
+        .main-register {
+            margin: 0 auto;
+
+            width: 430px;
+        }
+
+        .main-register div {
+            font-size: 15px;
+        }
+
+        .main-res-info {
+            clear: both;
+            margin-top: 50px;
+            border: 1px solid #fff;
+        }
+
+        .main-res-info div {
+            float: left;
+        }
+
+        h3 {
+            display: block;
+            margin-top: 0px;
+            padding-top: 0px;
+            width: 100%;
+            line-height: 50px;
+            text-align: center;
+            color: #fff;
+            background-color: #3385FF;
+        }
+
+        .main-res-info-left {
+            line-height: 28px;
+            width: 100px;
+            text-align: right;
+            margin-right: 20px;
+        }
+
+        .ipt {
+            padding: 4px 5px;
+            border: #ABABAB 1px solid;
+            box-shadow: 2px 2px 3px #EDEDED inset;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+
+        .btnReg {
+            display: inline-block;
+            width: 100px;
+            height: 32px;
+            font-size: 14px;
+            text-decoration: none;
+            line-height: 37px;
+            color: #fff;
+            outline: none;
+            text-align: center;
+            font-weight: bold;
+            background-color: #3385FF;
+            margin-left: 3px;
+        }
+
+        .btnReg2 {
+            margin-left: 20px;
+        }
+
+    </style>
 </head>
 <script type="text/javascript" src="__PUBLIC__/js/signup.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
@@ -14,32 +82,54 @@
     }
 </script>
 <body>
+<h3> 修改报名信息</h3>
+<div class="main-register">
 <form action="{:U('')}" method="post">
-    <div><input type="hidden" name="id" value="{$data.id}"/></div>
-    <div>真实姓名</div>
-    <div><input name="name" id="name" value="{$data.name}"/></div>
-    <div>手机号</div>
-    <div>
-        <input name="phone" id="phone" value="{$data.phone}"/>
+    <div class="main-res-info">
+        <div>
+            <input type="hidden" name="id" value="{$data.id}" />
+        </div>
+        <div class="main-res-info-left">真实姓名</div>
+        <div class="main-res-info-right">
+            <input name="name" id="name" class="ipt" value="{$data.name}">
+        </div>
     </div>
-    <div>所在省份-城市</div>
-    <div>
-        <select name="province" id="province" class="province" onchange="loadRegion('province','city','{:U('Index/getRegion')}');">
-            <volist name="provinceList" id="vo">
-                <option value="{$vo.id}" >{$vo.name}</option>
-            </volist>
-        </select>
-        <select name="city" id="city">
-        </select>
+    <div class="main-res-info">
+        <div class="main-res-info-left">手机号</div>
+        <div class="main-res-info-right">
+            <input name="phone" id="phone" class="ipt" value="{$data.phone}">
+        </div>
     </div>
-    <div>是否需要工作人员帮助预定酒店住宿？</div>
-    <div>
-        <input type="radio" id="1" name="accommodation" value="1" />是
-        <input type="radio" id="0" name="accommodation" value="0"/>否
+    <div class="main-res-info">
+        <div class="main-res-info-left">所在省份-城市</div>
+        <div>
+            <select name="province" id="province" class="province ipt" onchange="loadRegion('province','city','/index.php/Home/Index/getRegion.html');">
+                <volist name="provinceList" id="vo">
+                    <option value="{$vo.id}" >{$vo.name}</option>
+                </volist>
+            </select>
+            <select name="city" id="city" class="ipt"> </select>
+        </div>
     </div>
-    <div>
-        <a href="#" onclick="modify('{:U('Index/modifyHandler')}')">修改信息</a>
+    <div class="main-res-info">
+        <div>是否需要工作人员帮助预定酒店住宿？</div>
+        <div>
+            <input type="radio" name="accommodation" value="1" >是
+            <input type="radio" name="accommodation" value="0">否
+        </div>
     </div>
+    <div class="main-res-info">
+        <div class="main-res-info-left">&nbsp;</div>
+        <div class="main-res-info-right">
+            <div>
+                <a href="#" onclick="modify('{:U('Index/modifyHandler')}')" class="btnReg">修改信息</a>
+            </div>
+        </div>
+    </div>
+
+
+
 </form>
+</div>
 </body>
 </html>
